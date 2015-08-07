@@ -35,16 +35,16 @@
     <Compile Include="credential.js" />
     <Compile Include="mysql_control.js" />
     <Compile Include="routes\api.js" />
-    <Compile Include="routes\index.js" />
     <Compile Include="tests\control_test.js">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
     </Compile>
+    <Content Include="apidoc.json" />
+    <Content Include="apidocgen.bat" />
     <Content Include="package.json" />
+    <Content Include="public\favicon.ico" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
-    <Content Include="views\index.jade" />
-    <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tests\" />
@@ -53,7 +53,6 @@
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
-    <Folder Include="views\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

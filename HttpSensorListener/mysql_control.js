@@ -3,6 +3,16 @@ var credential = require('./credential.js');
 
 var connection = mysql.createConnection(credential.db);
 
+exports.connect = function(cb) {
+    connection.connect(function (err) {
+        if (err) {
+            console.error('mysql connection error');
+            cb(false)
+        } else {
+            cb(true);
+        }
+    });
+}
 
 exports.insert = function (timestamp, sensorId, value, cb) {
     var dateString = new dateFormat(new Date(timestamp), "yyyy-mm-dd'T'HH:MM:ss");

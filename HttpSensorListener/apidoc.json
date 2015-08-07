@@ -1,0 +1,7 @@
+{
+    "name": "Sensor Chart API",
+    "version": "0.1.0",
+    "description": "REST API for visualizing sensing data at Sensor Chart",
+    "title": "Sensor Chart REST API",
+    "url": "http://api.sensorchart.com/"
+}
