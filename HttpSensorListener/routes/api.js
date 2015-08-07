@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
  *     GET /john
  *     Authentication: John'sAuthKey
  *       
- * @apiHeader {String} Authentication your authentication key
+ * @apiHeader {String} Authorization your authentication key
  * @apiHeader {String} Content-Type application/json
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 200 OK
@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
 router.get('/:userId', function (req, res) {
     try {
         var userId = req.params.userId;
-        var authKey = req.headers['authentication'];
+        var authKey = req.headers['authorization'];
         var contentType = req.headers['content-type'];
         if (!controller.validator.authenticate(userId, authKey)) {
             throw new Error('401');
@@ -57,7 +57,7 @@ router.get('/:userId', function (req, res) {
  * @apiGroup Posting Observations
  * @apiExample {js} Example usage:
  *     POST /john/1421 
- *     Authentication: John'sAuthKey
+ *     Authorization: John'sAuthKey
  *     
  *     { "observations" : [
  *       {
@@ -65,7 +65,7 @@ router.get('/:userId', function (req, res) {
  *         "value": 10
  *         }
  *     ]}
- * @apiHeader {String} Authentication your authentication key     
+ * @apiHeader {String} Authorization your authentication key     
  * @apiHeader {String} Content-Type application/json or text/csv
  * @apiSuccessExample Success-Response:
  *  HTTP/1.1 202 Accepted
@@ -76,7 +76,7 @@ router.post('/:userId/:sensorId', function (req, res) {
     try {
         var userId = req.params.userId;
         var sensorId = req.params.sensorId;
-        var authKey = req.headers['authentication'];
+        var authKey = req.headers['authorization'];
 
         if (!controller.validator.authenticate(userId, authKey)) {
             throw new Error('401');
@@ -101,13 +101,17 @@ router.post('/:userId/:sensorId', function (req, res) {
                     var timestamp = observation.timestamp;
                     var value = observation.value;
                     if (!timestamp || !value) throw new Error('400');
-                    db.insert(timestamp, sensorId, value, function (result) {
-                        if (result == false) {
-                            console.log('failed to insert data');
-                        } else {
-                            console.log('success to insert data');
-                        }
-                    })
+
+                    var insertAsync = function (timestamp, sensorId, value) {
+                        db.insert(timestamp, sensorId, value, function (result) {
+                            if (result == false) {
+                                console.log('failed to insert data');
+                            } else {
+                                console.log('success to insert data');
+                            }
+                        });
+                    }(timestamp, sensorId, value);
+
                 }
                 res.sendStatus('202');
             } else {

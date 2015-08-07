@@ -19,7 +19,7 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "Authentication",
+            "field": "Authorization",
             "description": "<p>your authentication key</p> "
           },
           {
@@ -55,7 +55,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST /john/1421 \nAuthentication: John'sAuthKey\n\n{ \"observations\" : [\n  {\n    \"timestamp\": 1428591600000,\n    \"value\": 10\n    }\n]}",
+        "content": "POST /john/1421 \nAuthorization: John'sAuthKey\n\n{ \"observations\" : [\n  {\n    \"timestamp\": 1428591600000,\n    \"value\": 10\n    }\n]}",
         "type": "js"
       }
     ],
@@ -66,7 +66,7 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "Authentication",
+            "field": "Authorization",
             "description": "<p>your authentication key</p> "
           },
           {
