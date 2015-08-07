@@ -31,10 +31,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="control.js" />
     <Compile Include="credential.js" />
     <Compile Include="mysql_control.js" />
+    <Compile Include="routes\api.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\user.js" />
+    <Compile Include="tests\control_test.js">
+      <SubType>Code</SubType>
+      <TestFramework>ExportRunner</TestFramework>
+    </Compile>
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />

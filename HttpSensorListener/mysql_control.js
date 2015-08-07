@@ -6,8 +6,7 @@ var connection = mysql.createConnection(credential.db);
 
 exports.insert = function (timestamp, sensorId, value, cb) {
     var dateString = new dateFormat(new Date(timestamp), "yyyy-mm-dd'T'HH:MM:ss");
-    // TODO:update appropriate SQL below
-    connection.query('insert into tempData(regDate, st_mysensor_uid, value) values(?, ?, ?)',
+    connection.query('insert into st_mysensordata(regDate, st_mysensor_uid, value) values(?, ?, ?)',
             [dateString, sensorId, value],
                 function (err) {
         if (err && cb) cb(false);
