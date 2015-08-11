@@ -53,7 +53,8 @@ var validator = {
         if (!userCredit) return false;
 
         var userSensorList = userCredit.sensors;
-        for (userSensorId in userSensorList) {
+        for (var i = 0; i < userSensorList.length; i++) {
+            var userSensorId = userSensorList[i];
             if (userSensorId === sensorId) return true;
         }
         return false;

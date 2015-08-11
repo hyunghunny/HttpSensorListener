@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
  * @apiGroup Billboard
  * @apiExample {js} Example usage:
  *     GET /john
- *     Authentication: John'sAuthKey
+ *     Authorization: John'sAuthKey
  *       
  * @apiHeader {String} Authorization your authentication key
  * @apiHeader {String} Content-Type application/json
