@@ -8,7 +8,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "GET /john\nAuthentication: John'sAuthKey",
+        "content": "GET /john\nAuthorization: John'sAuthKey",
         "type": "js"
       }
     ],

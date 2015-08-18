@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
  * @apiGroup Billboard
  * @apiExample {js} Example usage:
  *     GET /john
- *     Authentication: John'sAuthKey
+ *     Authorization: John'sAuthKey
  *       
  * @apiHeader {String} Authorization your authentication key
  * @apiHeader {String} Content-Type application/json
@@ -100,17 +100,21 @@ router.post('/:userId/:sensorId', function (req, res) {
                     var observation = observations[i];
                     var timestamp = observation.timestamp;
                     var value = observation.value;
-                    if (!timestamp || !value) throw new Error('400');
+                    if (timestamp && value) {
+                        var insertAsync = function (timestamp, sensorId, value) {
+                            db.insert(timestamp, sensorId, value, function (result) {
+                                if (result == false) {
+                                    console.log('failed to insert data');
+                                } else {
+                                    console.log('success to insert data');
+                                }
+                            });
+                        }(timestamp, sensorId, value);                    
+                    } else {
+                        console.log('invalid obsevation: ' + JSON.stringify(observation));
+                    }
 
-                    var insertAsync = function (timestamp, sensorId, value) {
-                        db.insert(timestamp, sensorId, value, function (result) {
-                            if (result == false) {
-                                console.log('failed to insert data');
-                            } else {
-                                console.log('success to insert data');
-                            }
-                        });
-                    }(timestamp, sensorId, value);
+                    
 
                 }
                 res.sendStatus('202');
