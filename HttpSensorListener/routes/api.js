@@ -6,7 +6,7 @@ var db = require('../mysql_control.js');
 
 /* GET API doc */
 router.get('/', function (req, res) {
-    res.redirect('/apidoc/index.html');
+    res.redirect('/index.html');
 });
 
 /**
