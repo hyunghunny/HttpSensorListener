@@ -43,6 +43,7 @@
     <Content Include="apidocgen.bat" />
     <Content Include="package.json" />
     <Content Include="public\favicon.ico" />
+    <Content Include="public\index.html" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
   </ItemGroup>
