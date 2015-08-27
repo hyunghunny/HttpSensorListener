@@ -40,6 +40,34 @@ exports.insert = function (timestamp, sensorId, value, cb) {
     });
 }
 
+exports.getSensors = function (userId, callback) {
+    console.log("try to retrieve database...");
+    try {
+        var sql = "SELECT  `sensorid`,  `name`  FROM `starbucks`.`st_mysensor`";
+        sql = sql + " WHERE `st_user_uid`=" + userId + ";"
+        connection.query(sql,
+            function (err, rows, cols) {
+            if (err) throw err;
+            var sensorList = [];
+
+            for (var i = 0; i < rows.length; i++) {
+                // TODO:set sensor info                            
+                var sensorObj = {
+                    "id" : rows[i].sensorId,
+                    "name" : rows[i].name
+                }
+                sensorList.push[sensorObj];
+            }
+            
+            callback(sensorList);
+
+        });
+    } catch (err) {
+        console.log("DB query error : " + err.message);
+        throw new Error('500');
+    }
+};
+
 // return date to "yyyy-mm-dd HH:MM:ss"
 function formatDate(date) {
 
