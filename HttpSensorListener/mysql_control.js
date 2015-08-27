@@ -40,6 +40,10 @@ exports.insert = function (timestamp, sensorId, value, cb) {
     });
 }
 
+exports.inquire = function (sql, callback) {
+    // TODO: make a query here
+}
+
 // return date to "yyyy-mm-dd HH:MM:ss"
 function formatDate(date) {
 
