@@ -117,6 +117,8 @@ var RESTTransmitter = (function () {
     return RESTTransmitter;
 })();
 
+var sensorchart = {};
+
 // AJAX utility
 var AJAJSONManager = (function () {
     // XXX: baseUrl SHOULD NOT be ended with '/'
@@ -246,7 +248,12 @@ if (typeof module !== 'undefined') {
         var transmitter = new RESTTransmitter('http://147.47.123.49:3000');
         transmitter.login(id, password, cb);
     }
-//exports.logger = logger;
+
+} else {
+    sensorchart.login = function (id, password, cb) {
+        var transmitter = new RESTTransmitter('http://147.47.123.49:3000');
+        transmitter.login(id, password, cb);
+    }
 }
 
 //# sourceMappingURL=api.js.map
