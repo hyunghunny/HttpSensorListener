@@ -43,7 +43,7 @@ exports.insert = function (timestamp, sensorId, value, cb) {
 exports.getSensors = function (user_uid, callback) {
     console.log("try to retrieve database...");
     try {
-        var sql = "SELECT  `sensorid`,  `name`  FROM `starbucks`.`st_mysensor`";
+        var sql = "SELECT  `uid`,  `sensorid`,  `name`  FROM `starbucks`.`st_mysensor`";
         sql = sql + " WHERE `st_user_uid`=" + user_uid + ";"
         connection.query(sql,
             function (err, rows, cols) {
@@ -53,7 +53,8 @@ exports.getSensors = function (user_uid, callback) {
             for (var i = 0; i < rows.length; i++) {
                 // TODO:set sensor info                            
                 var sensorObj = {
-                    "id" : rows[i].sensorid,
+                    "uid" : rows[i].uid,                    
+                    "sensorId" : rows[i].sensorid,
                     "name" : rows[i].name
                 }
                 sensorList.push(sensorObj);
