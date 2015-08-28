@@ -40,11 +40,11 @@ exports.insert = function (timestamp, sensorId, value, cb) {
     });
 }
 
-exports.getSensors = function (userId, callback) {
+exports.getSensors = function (user_uid, callback) {
     console.log("try to retrieve database...");
     try {
         var sql = "SELECT  `sensorid`,  `name`  FROM `starbucks`.`st_mysensor`";
-        sql = sql + " WHERE `st_user_uid`=" + userId + ";"
+        sql = sql + " WHERE `st_user_uid`=" + user_uid + ";"
         connection.query(sql,
             function (err, rows, cols) {
             if (err) throw err;
@@ -53,10 +53,10 @@ exports.getSensors = function (userId, callback) {
             for (var i = 0; i < rows.length; i++) {
                 // TODO:set sensor info                            
                 var sensorObj = {
-                    "id" : rows[i].sensorId,
+                    "id" : rows[i].sensorid,
                     "name" : rows[i].name
                 }
-                sensorList.push[sensorObj];
+                sensorList.push(sensorObj);
             }
             
             callback(sensorList);

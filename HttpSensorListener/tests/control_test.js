@@ -1,14 +1,24 @@
 ﻿var assert = require('assert');
-var controller = require('../control.js');
+var controller = require('../mysql_control.js');
 
-exports['equality test'] = function () {
-    var array = {};
-    
-    var equalityTest = (typeof array == 'object');
-    assert.ok(equalityTest, typeof array);
+exports['get sensors'] = function () {
+    try {
+        var user_uid = 2;
+        controller.connect(function (isConnected) {
+            if (!isConnected) {
+                assert.ok(isConnected, 'connection failed');
+            } else {
+                controller.getSensors(user_uid, function (sensors) {
+                    console.log(sensors);
+                    assert.ok(true, sensors);
+                    return;
+                });
+            }
+
+        });
+
+    } catch (ex) {
+        assert.ok(false, ex);
+    }    
 }
 
-exports['Test 2'] = function () {
-    assert.ok(1 === 1, "This shouldn't fail");
-    assert.ok(true, "This should fail");
-}

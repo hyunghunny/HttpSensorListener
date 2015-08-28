@@ -113,9 +113,6 @@ router.post('/:userId/:sensorId', function (req, res) {
                     } else {
                         console.log('invalid obsevation: ' + JSON.stringify(observation));
                     }
-
-                    
-
                 }
                 res.sendStatus('202');
             } else {
