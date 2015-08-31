@@ -94,7 +94,7 @@ var RESTTransmitter = (function () {
         for (var i = 0; i < observations.length; i++) {
             var obs = observations[i];
             var datePublished = new Date(obs.datePublished);
-            if (datePublished instanceof Date) {
+            if (datePublished instanceof Date && obs.value) {
                 var observation = {
                     "timestamp": datePublished.getTime(),
                     "value": obs.value
@@ -102,7 +102,13 @@ var RESTTransmitter = (function () {
                 content.observations.push(observation);
             } else {
                 console.log('invalid date type: ' + datePublished);
+                console.log('invalid value type: ' + obs.value);
             }
+        }
+        if (content.observations.length == 0) {
+            console.log('No valid observations');
+            cb(false);
+            return;
         }
         var self = this;
         var ajajson = new AJAJSONManager(this.baseUrl);
